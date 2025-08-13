@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Cosmos - 视频生成场景管理系统</title>
+    <link rel="stylesheet" href="./aws-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>">
+</head>
+<body>
+    <!-- AWS风格顶部导航 -->
+    <header class="aws-header">
+        <div class="aws-header-content">
+            <a href="#" class="aws-logo">Amazon Cosmos</a>
+            <nav class="aws-nav">
+                <a href="#scene-generation">场景生成</a>
+                <a href="#scene-management">场景管理</a>
+                <a href="#video-generation">视频生成</a>
+                <a href="#system-status">系统状态</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="aws-hero">
+        <div class="aws-container">
+            <h1>Amazon Cosmos</h1>
+            <p>基于人工智能的视频生成场景管理系统，让创意变为现实</p>
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <main class="aws-container">
+        <!-- 导航标签 -->
+        <div class="aws-tabs">
+            <button class="aws-tab active" onclick="showTab('scene-generation')" data-tab="scene-generation">
+                🎨 场景生成
+            </button>
+            <button class="aws-tab" onclick="showTab('scene-management')" data-tab="scene-management">
+                📚 场景管理
+            </button>
+            <button class="aws-tab" onclick="showTab('video-generation')" data-tab="video-generation">
+                🎥 视频生成
+            </button>
+            <button class="aws-tab" onclick="showTab('system-status')" data-tab="system-status">
+                📊 系统状态
+            </button>
+        </div>
+
+        <!-- 场景生成标签页 -->
+        <div id="scene-generation" class="tab-content">
+            <div class="aws-card">
+                <div class="aws-card-header">
+                    <div>
+                        <h2 class="aws-card-title">AI场景描述生成</h2>
+                        <p class="aws-card-subtitle">输入简短描述，AI将生成详细的场景描述</p>
+                    </div>
+                </div>
+
+                <div class="aws-grid aws-grid-2">
+                    <div>
+                        <div class="aws-form-group">
+                            <label class="aws-form-label" for="scene-desc">场景描述</label>
+                            <textarea 
+                                id="scene-desc" 
+                                class="aws-form-textarea" 
+                                placeholder="例如：雨后晚上的城市道路，霓虹灯倒映在湿润的路面上..."
+                                rows="4"
+                            ></textarea>
+                            <div class="aws-form-help">请详细描述您想要生成的场景，包括环境、光线、氛围等细节</div>
+                        </div>
+
+                        <div class="aws-form-group">
+                            <label class="aws-form-label" for="scene-type">场景类型</label>
+                            <select id="scene-type" class="aws-form-select">
+                                <option value="SingleView">单视角场景</option>
+                                <option value="MultiView">多视角场景</option>
+                            </select>
+                            <div class="aws-form-help">单视角适合简单场景，多视角适合复杂环境</div>
+                        </div>
+
+                        <div class="aws-form-group">
+                            <label class="aws-form-label">
+                                <input type="checkbox" id="use-streaming" style="margin-right: 8px;">
+                                启用实时生成
+                            </label>
+                            <div class="aws-form-help">实时显示生成过程，可以看到内容逐步生成</div>
+                        </div>
+
+                        <button class="aws-btn aws-btn-primary" onclick="generateScene()">
+                            <span>🚀</span>
+                            开始生成场景
+                        </button>
+                    </div>
+
+                    <div class="aws-card" style="background: var(--aws-gray-50); margin: 0;">
+                        <h3 style="color: var(--aws-blue); margin-bottom: var(--aws-space-m);">💡 使用指南</h3>
+                        
+                        <div style="margin-bottom: var(--aws-space-l);">
+                            <h4 style="color: var(--aws-orange); margin-bottom: var(--aws-space-s);">单视角场景</h4>
+                            <ul style="color: var(--aws-gray-700); padding-left: var(--aws-space-l);">
+                                <li>生成单一视角描述</li>
+                                <li>适合简单场景</li>
+                                <li>处理时间：约1小时</li>
+                                <li>资源消耗较低</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--aws-space-l);">
+                            <h4 style="color: var(--aws-orange); margin-bottom: var(--aws-space-s);">多视角场景</h4>
+                            <ul style="color: var(--aws-gray-700); padding-left: var(--aws-space-l);">
+                                <li>生成6个不同视角</li>
+                                <li>适合复杂环境</li>
+                                <li>处理时间：约2小时</li>
+                                <li>提供全方位描述</li>
+                            </ul>
+                        </div>
+
+                        <div class="aws-alert aws-alert-info">
+                            <span class="aws-alert-icon">💡</span>
+                            <div>
+                                <strong>提示：</strong>描述越详细，生成的场景质量越高。建议包含环境、光线、氛围、物体等具体信息。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 生成结果区域 -->
+                <div id="generation-result" class="aws-hidden" style="margin-top: var(--aws-space-l);">
+                    <div class="aws-card">
+                        <h3 class="aws-card-title">生成结果</h3>
+                        <div id="result-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 场景管理标签页 -->
+        <div id="scene-management" class="tab-content aws-hidden">
+            <div class="aws-card">
+                <div class="aws-card-header">
+                    <div>
+                        <h2 class="aws-card-title">场景库管理</h2>
+                        <p class="aws-card-subtitle">管理和查看已生成的场景描述</p>
+                    </div>
+                    <button class="aws-btn aws-btn-secondary" onclick="loadScenes()">
+                        <span>🔄</span>
+                        刷新列表
+                    </button>
+                </div>
+
+                <div id="scenes-list" class="aws-loading">
+                    <div class="aws-spinner"></div>
+                    <span>点击"刷新列表"加载场景数据</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 视频生成标签页 -->
+        <div id="video-generation" class="tab-content aws-hidden">
+            <div class="aws-card">
+                <div class="aws-card-header">
+                    <div>
+                        <h2 class="aws-card-title">视频生成</h2>
+                        <p class="aws-card-subtitle">选择场景并提交视频生成任务</p>
+                    </div>
+                </div>
+
+                <div class="aws-grid aws-grid-2">
+                    <div>
+                        <div class="aws-form-group">
+                            <label class="aws-form-label" for="video-scene-select">选择场景</label>
+                            <select id="video-scene-select" class="aws-form-select">
+                                <option value="">请先加载场景列表</option>
+                            </select>
+                            <div class="aws-form-help">从场景库中选择要生成视频的场景</div>
+                        </div>
+
+                        <div style="display: flex; gap: var(--aws-space-m); flex-wrap: wrap;">
+                            <button class="aws-btn aws-btn-primary" onclick="submitVideoGeneration()">
+                                <span>🎬</span>
+                                提交生成任务
+                            </button>
+                            <button class="aws-btn aws-btn-outline" onclick="checkTaskStatus()">
+                                <span>📊</span>
+                                查询任务状态
+                            </button>
+                        </div>
+
+                        <div id="video-result" style="margin-top: var(--aws-space-l);"></div>
+                    </div>
+
+                    <div class="aws-card" style="background: var(--aws-gray-50); margin: 0;">
+                        <h3 style="color: var(--aws-blue); margin-bottom: var(--aws-space-m);">🎥 视频生成流程</h3>
+                        
+                        <div style="margin-bottom: var(--aws-space-m);">
+                            <div style="display: flex; align-items: center; margin-bottom: var(--aws-space-s);">
+                                <span style="background: var(--aws-orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: var(--aws-space-s); font-size: 12px; font-weight: bold;">1</span>
+                                <span>选择已生成的场景</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: var(--aws-space-s);">
+                                <span style="background: var(--aws-orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: var(--aws-space-s); font-size: 12px; font-weight: bold;">2</span>
+                                <span>提交视频生成任务</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: var(--aws-space-s);">
+                                <span style="background: var(--aws-orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: var(--aws-space-s); font-size: 12px; font-weight: bold;">3</span>
+                                <span>系统自动处理生成</span>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span style="background: var(--aws-orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: var(--aws-space-s); font-size: 12px; font-weight: bold;">4</span>
+                                <span>完成后获取视频链接</span>
+                            </div>
+                        </div>
+
+                        <div class="aws-alert aws-alert-warning">
+                            <span class="aws-alert-icon">⚠️</span>
+                            <div>
+                                <strong>注意：</strong>视频生成需要较长时间，请耐心等待。生成过程中请勿重复提交任务。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系统状态标签页 -->
+        <div id="system-status" class="tab-content aws-hidden">
+            <div class="aws-card">
+                <div class="aws-card-header">
+                    <div>
+                        <h2 class="aws-card-title">系统监控</h2>
+                        <p class="aws-card-subtitle">实时查看系统运行状态和资源使用情况</p>
+                    </div>
+                    <button class="aws-btn aws-btn-secondary" onclick="checkSystemStatus()">
+                        <span>🔍</span>
+                        检查状态
+                    </button>
+                </div>
+
+                <div id="system-metrics" class="aws-grid aws-grid-3" style="margin-bottom: var(--aws-space-l);">
+                    <div class="aws-metric-card">
+                        <div class="aws-metric-value" id="active-tasks">-</div>
+                        <div class="aws-metric-label">活跃任务</div>
+                    </div>
+                    <div class="aws-metric-card">
+                        <div class="aws-metric-value" id="available-gpu">-</div>
+                        <div class="aws-metric-label">可用GPU</div>
+                    </div>
+                    <div class="aws-metric-card">
+                        <div class="aws-metric-value" id="queue-size">-</div>
+                        <div class="aws-metric-label">队列任务</div>
+                    </div>
+                </div>
+
+                <div class="aws-grid aws-grid-2">
+                    <div class="aws-card" style="margin: 0;">
+                        <h3 style="color: var(--aws-blue); margin-bottom: var(--aws-space-m);">📋 系统日志</h3>
+                        <p style="color: var(--aws-gray-600); margin-bottom: var(--aws-space-m);">查看详细的系统运行日志和诊断信息</p>
+                        <button class="aws-btn aws-btn-outline" onclick="openLogPage()">
+                            <span>📄</span>
+                            打开日志页面
+                        </button>
+                    </div>
+
+                    <div id="system-status-detail" class="aws-card" style="margin: 0; background: var(--aws-gray-50);">
+                        <h3 style="color: var(--aws-blue); margin-bottom: var(--aws-space-m);">⚙️ 系统信息</h3>
+                        <div id="system-info">
+                            <div class="aws-loading">
+                                <span>点击"检查状态"获取系统信息</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AWS风格页脚 -->
+    <footer style="background: var(--aws-blue); color: var(--aws-white); padding: var(--aws-space-xl) 0; margin-top: var(--aws-space-xxl);">
+        <div class="aws-container">
+            <div class="aws-grid aws-grid-3">
+                <div>
+                    <h4 style="margin-bottom: var(--aws-space-m);">Amazon Cosmos</h4>
+                    <p style="color: var(--aws-gray-300);">基于AWS云服务的AI视频生成平台</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: var(--aws-space-m);">功能特性</h4>
+                    <ul style="list-style: none; color: var(--aws-gray-300);">
+                        <li style="margin-bottom: var(--aws-space-xs);">AI场景生成</li>
+                        <li style="margin-bottom: var(--aws-space-xs);">智能视频制作</li>
+                        <li style="margin-bottom: var(--aws-space-xs);">实时状态监控</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: var(--aws-space-m);">技术支持</h4>
+                    <p style="color: var(--aws-gray-300);">基于CloudScape Design System构建</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: var(--aws-space-xl); padding-top: var(--aws-space-l); border-top: 1px solid var(--aws-blue-light); color: var(--aws-gray-400);">
+                © 2025 Amazon Cosmos. Powered by AWS.
+            </div>
+        </div>
+    </footer>
+
+    <script src="./aws-app.js"></script>
+</body>
+</html>

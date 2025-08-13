@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudScape 调试页面</title>
+    <link rel="stylesheet" href="https://unpkg.com/@cloudscape-design/components/styles.css">
+    <style>
+        body { margin: 20px; font-family: Arial, sans-serif; }
+        .debug-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .error { color: red; }
+        .success { color: green; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>CloudScape 调试页面</h1>
+    
+    <div class="debug-section">
+        <h2>依赖加载检查</h2>
+        <div id="dependency-check">检查中...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>配置检查</h2>
+        <div id="config-check">检查中...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>API客户端检查</h2>
+        <div id="api-check">检查中...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>组件检查</h2>
+        <div id="component-check">检查中...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>简单CloudScape组件测试</h2>
+        <div id="simple-test"></div>
+    </div>
+
+    <!-- 依赖加载 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@cloudscape-design/components/index.js"></script>
+    
+    <!-- 应用脚本 -->
+    <script src="./config.js"></script>
+    <script src="./api.js"></script>
+    
+    <script>
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            element.innerHTML += `<div class="${className}">${message}</div>`;
+        }
+        
+        // 1. 检查依赖
+        setTimeout(() => {
+            const depCheck = document.getElementById('dependency-check');
+            depCheck.innerHTML = '';
+            
+            if (typeof React !== 'undefined') {
+                log('dependency-check', '✅ React 加载成功', 'success');
+            } else {
+                log('dependency-check', '❌ React 加载失败', 'error');
+            }
+            
+            if (typeof ReactDOM !== 'undefined') {
+                log('dependency-check', '✅ ReactDOM 加载成功', 'success');
+            } else {
+                log('dependency-check', '❌ ReactDOM 加载失败', 'error');
+            }
+            
+            if (typeof CloudscapeDesignSystem !== 'undefined') {
+                log('dependency-check', '✅ CloudScape Design System 加载成功', 'success');
+                log('dependency-check', `可用组件: ${Object.keys(CloudscapeDesignSystem).slice(0, 5).join(', ')}...`, 'info');
+            } else {
+                log('dependency-check', '❌ CloudScape Design System 加载失败', 'error');
+            }
+        }, 1000);
+        
+        // 2. 检查配置
+        setTimeout(() => {
+            const configCheck = document.getElementById('config-check');
+            configCheck.innerHTML = '';
+            
+            if (typeof CONFIG !== 'undefined') {
+                log('config-check', '✅ CONFIG 加载成功', 'success');
+                log('config-check', `COSMOS_API_URL: ${CONFIG.COSMOS_API_URL}`, 'info');
+                log('config-check', `ENHANCE_API_URL: ${CONFIG.ENHANCE_API_URL}`, 'info');
+            } else {
+                log('config-check', '❌ CONFIG 加载失败', 'error');
+            }
+        }, 1500);
+        
+        // 3. 检查API客户端
+        setTimeout(() => {
+            const apiCheck = document.getElementById('api-check');
+            apiCheck.innerHTML = '';
+            
+            if (typeof apiClient !== 'undefined') {
+                log('api-check', '✅ apiClient 加载成功', 'success');
+                try {
+                    const uuid = apiClient.generateUUID();
+                    log('api-check', `UUID生成测试: ${uuid}`, 'success');
+                } catch (e) {
+                    log('api-check', `UUID生成失败: ${e.message}`, 'error');
+                }
+            } else {
+                log('api-check', '❌ apiClient 加载失败', 'error');
+            }
+        }, 2000);
+        
+        // 4. 检查组件
+        setTimeout(() => {
+            const componentCheck = document.getElementById('component-check');
+            componentCheck.innerHTML = '';
+            
+            const components = ['SceneGeneration', 'SceneManagement', 'VideoGeneration', 'LogDiagnosis'];
+            components.forEach(comp => {
+                if (typeof window[comp] !== 'undefined') {
+                    log('component-check', `✅ ${comp} 组件加载成功`, 'success');
+                } else {
+                    log('component-check', `❌ ${comp} 组件加载失败`, 'error');
+                }
+            });
+        }, 2500);
+        
+        // 5. 简单组件测试
+        setTimeout(() => {
+            if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined' && typeof CloudscapeDesignSystem !== 'undefined') {
+                try {
+                    const { Button, Alert, Container, Header } = CloudscapeDesignSystem;
+                    
+                    function SimpleTest() {
+                        const [clicked, setClicked] = React.useState(false);
+                        
+                        return React.createElement(Container, {
+                            header: React.createElement(Header, { variant: "h3" }, "简单测试")
+                        },
+                            React.createElement(Button, {
+                                variant: "primary",
+                                onClick: () => setClicked(!clicked)
+                            }, "点击测试"),
+                            clicked && React.createElement(Alert, {
+                                type: "success",
+                                dismissible: true,
+                                onDismiss: () => setClicked(false)
+                            }, "CloudScape组件工作正常！")
+                        );
+                    }
+                    
+                    const root = ReactDOM.createRoot(document.getElementById('simple-test'));
+                    root.render(React.createElement(SimpleTest));
+                    
+                    log('component-check', '✅ 简单组件测试成功', 'success');
+                } catch (e) {
+                    log('component-check', `❌ 简单组件测试失败: ${e.message}`, 'error');
+                }
+            }
+        }, 3000);
+        
+        // 错误捕获
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript Error:', e);
+            document.body.innerHTML += `<div class="debug-section error">
+                <h2>JavaScript 错误</h2>
+                <p><strong>错误:</strong> ${e.message}</p>
+                <p><strong>文件:</strong> ${e.filename}</p>
+                <p><strong>行号:</strong> ${e.lineno}</p>
+            </div>`;
+        });
+    </script>
+</body>
+</html>

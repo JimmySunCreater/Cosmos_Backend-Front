@@ -1,0 +1,95 @@
+2025-06-16 04:52:08,703 - botocore.credentials - INFO - Found credentials from IAM Role: ec2-role-admin-soca
+2025-06-16 04:52:08,776 - __main__ - INFO - Task scheduler thread started
+2025-06-16 04:52:08,779 - __main__ - INFO - Starting Cosmos API Service on 0.0.0.0:8080
+2025-06-16 04:52:08,783 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.16.230:8080
+2025-06-16 04:52:08,783 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-16 04:52:37,342 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-16 04:52:37,342 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 04:52:37] "GET /health HTTP/1.1" 200 -
+2025-06-16 04:53:33,635 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-16 04:53:33,635 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 04:53:33] "GET /health HTTP/1.1" 200 -
+2025-06-16 04:53:33,644 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-16 04:53:33,645 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 04:53:33] "GET /health HTTP/1.1" 200 -
+2025-06-16 04:54:54,951 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-16 04:54:54,951 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 04:54:54] "GET /health HTTP/1.1" 200 -
+2025-06-16 05:00:29,503 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-16 05:00:29,503 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 05:00:29] "GET /health HTTP/1.1" 200 -
+2025-06-16 05:18:36,331 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 05:18:36] "GET /status/285e6e9b-3d69-4f1a-8ede-73382b9b5678 HTTP/1.1" 200 -
+2025-06-16 05:19:46,493 - werkzeug - INFO - 127.0.0.1 - - [16/Jun/2025 05:19:46] "GET /status/285e6e9b-3d69-4f1a-8ede-73382b9b5678 HTTP/1.1" 200 -
+2025-06-17 00:19:59,796 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 00:19:59,797 - werkzeug - INFO - 127.0.0.1 - - [17/Jun/2025 00:19:59] "GET /health HTTP/1.1" 200 -
+2025-06-17 00:20:20,085 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 00:20:20,085 - werkzeug - INFO - 127.0.0.1 - - [17/Jun/2025 00:20:20] "GET /health HTTP/1.1" 200 -
+2025-06-17 00:21:52,426 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 00:21:52,426 - werkzeug - INFO - 127.0.0.1 - - [17/Jun/2025 00:21:52] "GET /health HTTP/1.1" 200 -
+2025-06-17 00:23:58,617 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 00:23:58,617 - werkzeug - INFO - 127.0.0.1 - - [17/Jun/2025 00:23:58] "GET /health HTTP/1.1" 200 -
+2025-06-17 00:26:58,756 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 00:26:58,756 - werkzeug - INFO - 127.0.0.1 - - [17/Jun/2025 00:26:58] "GET /health HTTP/1.1" 200 -
+2025-06-17 02:00:56,937 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 02:00:56,938 - werkzeug - INFO - 172.31.16.230 - - [17/Jun/2025 02:00:56] "GET /health HTTP/1.1" 200 -
+2025-06-17 02:01:30,341 - werkzeug - INFO - 172.31.16.230 - - [17/Jun/2025 02:01:30] "[33mGET /05106e93-a073-4988-95f3-6e084b74e609 HTTP/1.1[0m" 404 -
+2025-06-17 02:01:59,494 - werkzeug - INFO - 172.31.16.230 - - [17/Jun/2025 02:01:59] "GET /status/05106e93-a073-4988-95f3-6e084b74e609 HTTP/1.1" 200 -
+2025-06-17 02:06:09,306 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-06-17 02:06:09,307 - werkzeug - INFO - 172.31.16.230 - - [17/Jun/2025 02:06:09] "GET /health HTTP/1.1" 200 -
+2025-06-18 08:35:38,111 - botocore.credentials - INFO - Found credentials from IAM Role: ec2-role-admin-soca
+2025-06-18 08:35:38,223 - __main__ - INFO - Task scheduler thread started
+2025-06-18 08:35:38,226 - __main__ - INFO - Starting Cosmos API Service on 0.0.0.0:8080
+2025-06-18 08:35:38,234 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.16.230:8080
+2025-06-18 08:35:38,234 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-11 12:54:48,142 - botocore.credentials - INFO - Found credentials from IAM Role: ec2-role-admin-soca
+2025-07-11 12:54:48,255 - __main__ - INFO - Task scheduler thread started
+2025-07-11 12:54:48,258 - __main__ - INFO - Starting Cosmos API Service on 0.0.0.0:8080
+2025-07-11 12:54:48,265 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.16.230:8080
+2025-07-11 12:54:48,266 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-11 13:12:22,792 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-07-11 13:12:22,793 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:12:22] "GET /health HTTP/1.1" 200 -
+2025-07-11 13:31:05,332 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-07-11 13:31:05,333 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:31:05] "GET /health HTTP/1.1" 200 -
+2025-07-11 13:31:21,780 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:31:21] "GET /logs HTTP/1.1" 200 -
+2025-07-11 13:31:31,641 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:31:31] "GET /logs/stream HTTP/1.1" 200 -
+2025-07-11 13:33:34,165 - botocore.credentials - INFO - Found credentials from IAM Role: ec2-role-admin-soca
+2025-07-11 13:33:34,243 - __main__ - INFO - Task scheduler thread started
+2025-07-11 13:33:34,247 - __main__ - INFO - Starting Cosmos API Service on 0.0.0.0:8080
+2025-07-11 13:33:34,251 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.16.230:8080
+2025-07-11 13:33:34,252 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-11 13:33:54,574 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-07-11 13:33:54,574 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:33:54] "GET /health HTTP/1.1" 200 -
+2025-07-11 13:34:11,213 - __main__ - INFO - Extracted 1 Chinese prompts for SingleView task 49d1647b-557d-4618-a360-2b621ce15cde
+2025-07-11 13:34:11,213 - __main__ - INFO - Starting translation for task 49d1647b-557d-4618-a360-2b621ce15cde
+2025-07-11 13:34:11,216 - werkzeug - INFO - 127.0.0.1 - - [11/Jul/2025 13:34:11] "POST /generate HTTP/1.1" 200 -
+2025-07-11 13:34:11,221 - __main__ - INFO - Updated task 49d1647b-557d-4618-a360-2b621ce15cde generation_status to Translating
+2025-07-11 13:34:11,221 - __main__ - INFO - Processing prompt: The vehicle is traveling on a four-lane road durin...
+2025-07-11 13:34:11,222 - translator - INFO - Text appears to be English already: The vehicle is traveling on a four-lane road durin...
+2025-07-11 13:34:11,222 - __main__ - INFO - Text prompt is already in English, no translation needed
+2025-07-11 13:34:11,222 - __main__ - INFO - Mapping prompt -> PROMPT_FRONT_EN
+2025-07-11 13:34:11,228 - __main__ - INFO - Saved 1 translated prompts to DynamoDB for task 49d1647b-557d-4618-a360-2b621ce15cde
+2025-07-11 13:34:11,228 - __main__ - INFO - Saved PROMPT_FRONT_EN: The vehicle is traveling on a four-lane road durin...
+2025-07-11 13:34:11,234 - __main__ - INFO - Updated task 49d1647b-557d-4618-a360-2b621ce15cde generation_status to Waiting
+2025-07-11 13:34:11,234 - __main__ - INFO - Task added to queue after translation: 49d1647b-557d-4618-a360-2b621ce15cde, SceneType: SingleView
+2025-07-11 13:34:11,289 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-07-11 13:34:11,289 - __main__ - INFO - Processing task: 49d1647b-557d-4618-a360-2b621ce15cde, SceneType: SingleView
+2025-07-11 13:34:11,289 - __main__ - INFO - Started processing thread for task 49d1647b-557d-4618-a360-2b621ce15cde (SingleView)
+2025-07-11 13:34:11,290 - gpu_manager - ERROR - Failed to get GPU memory usage: [Errno 2] No such file or directory: 'nvidia-smi'
+2025-07-11 13:34:11,290 - gpu_manager - WARNING - No available GPU for SingleView task 49d1647b-557d-4618-a360-2b621ce15cde
+2025-07-11 13:34:11,290 - __main__ - ERROR - No available GPU for SingleView task 49d1647b-557d-4618-a360-2b621ce15cde
+2025-07-11 13:34:11,299 - __main__ - INFO - Updated task 49d1647b-557d-4618-a360-2b621ce15cde generation_status to Failed
+2025-08-13 08:53:21,493 - botocore.credentials - INFO - Found credentials from IAM Role: ec2-role-admin-soca
+2025-08-13 08:53:21,620 - __main__ - INFO - Task scheduler thread started
+2025-08-13 08:53:21,624 - __main__ - INFO - Starting Cosmos API Service on 0.0.0.0:8080
+2025-08-13 08:53:21,630 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.16.230:8080
+2025-08-13 08:53:21,630 - werkzeug - INFO - [33mPress CTRL+C to quit[0m

@@ -1,0 +1,242 @@
+/* CloudScape应用自定义样式 */
+
+/* 全局样式 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Amazon Ember", "Helvetica Neue", Roboto, Arial, sans-serif;
+    background-color: #fafafa;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    /* 移动端优化 */
+    .awsui-util-container {
+        padding: 8px !important;
+    }
+    
+    .awsui-grid {
+        gap: 8px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* 大屏幕优化 */
+    .awsui-util-container {
+        max-width: none;
+    }
+}
+
+/* 4K屏幕优化 */
+@media (min-width: 3840px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .awsui-util-container {
+        padding: 24px !important;
+    }
+    
+    .awsui-space-between > * {
+        margin-bottom: 24px !important;
+    }
+}
+
+/* 自定义组件样式 */
+.scene-preview {
+    background-color: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+}
+
+.status-indicator-custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.video-player-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 16px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.log-iframe-container {
+    width: 100%;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格优化 */
+.awsui-table {
+    font-size: 14px;
+}
+
+.awsui-table-cell {
+    vertical-align: top;
+}
+
+/* 文本区域优化 */
+.awsui-textarea {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* 按钮组优化 */
+.awsui-button-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* 加载状态优化 */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* 空状态优化 */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #687078;
+}
+
+.empty-state h3 {
+    margin-bottom: 8px;
+    color: #232f3e;
+}
+
+/* 错误状态优化 */
+.error-container {
+    padding: 16px;
+    background-color: #fdf2f2;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    color: #721c24;
+}
+
+/* 成功状态优化 */
+.success-container {
+    padding: 16px;
+    background-color: #f0f9f0;
+    border: 1px solid #c3e6c3;
+    border-radius: 8px;
+    color: #155724;
+}
+
+/* 代码块样式 */
+pre {
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #24292e;
+}
+
+/* JSON显示优化 */
+.json-display {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* 统计数字显示 */
+.metric-display {
+    text-align: center;
+    padding: 16px;
+}
+
+.metric-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #232f3e;
+    line-height: 1;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #687078;
+    margin-top: 4px;
+}
+
+/* 响应式网格优化 */
+@media (max-width: 576px) {
+    .awsui-grid-item {
+        grid-column: 1 / -1 !important;
+    }
+    
+    .awsui-button-group {
+        flex-direction: column;
+    }
+    
+    .awsui-button-group .awsui-button {
+        width: 100%;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .awsui-app-layout-navigation,
+    .awsui-top-navigation,
+    .awsui-breadcrumb-group {
+        display: none !important;
+    }
+    
+    .awsui-app-layout-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .awsui-util-container {
+        border: 2px solid #000;
+    }
+    
+    .awsui-button {
+        border: 2px solid #000 !important;
+    }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 深色模式支持（预留） */
+@media (prefers-color-scheme: dark) {
+    /* 深色模式样式将在未来版本中添加 */
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos视频生成场景管理系统</title>
+    <link rel="stylesheet" href="https://unpkg.com/@cloudscape-design/components/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="app">
+        <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+            <h2>正在加载 Cosmos CloudScape 界面...</h2>
+            <p>请稍候，正在加载必要的组件</p>
+            <div id="loading-status" style="margin-top: 20px; color: #666;"></div>
+        </div>
+    </div>
+    
+    <!-- CloudScape Design System -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@cloudscape-design/components/index.js"></script>
+    
+    <!-- 加载状态更新 -->
+    <script>
+        let loadingSteps = [];
+        
+        function updateLoadingStatus(step) {
+            loadingSteps.push(step);
+            const statusDiv = document.getElementById('loading-status');
+            if (statusDiv) {
+                statusDiv.innerHTML = loadingSteps.map(s => `✓ ${s}`).join('<br>');
+            }
+        }
+        
+        // 检查依赖加载状态
+        function checkDependencies() {
+            if (typeof React !== 'undefined') {
+                updateLoadingStatus('React 已加载');
+            }
+            if (typeof ReactDOM !== 'undefined') {
+                updateLoadingStatus('ReactDOM 已加载');
+            }
+            if (typeof CloudscapeDesignSystem !== 'undefined') {
+                updateLoadingStatus('CloudScape Design System 已加载');
+            }
+        }
+        
+        // 定期检查依赖
+        const checkInterval = setInterval(() => {
+            checkDependencies();
+            if (typeof React !== 'undefined' && 
+                typeof ReactDOM !== 'undefined' && 
+                typeof CloudscapeDesignSystem !== 'undefined') {
+                clearInterval(checkInterval);
+                updateLoadingStatus('开始加载应用组件...');
+            }
+        }, 100);
+    </script>
+    
+    <!-- Application Scripts -->
+    <script src="./config.js" onload="updateLoadingStatus('配置文件已加载')"></script>
+    <script src="./api.js" onload="updateLoadingStatus('API客户端已加载')"></script>
+    <script src="./components/SceneGeneration.js" onload="updateLoadingStatus('场景生成组件已加载')"></script>
+    <script src="./components/SceneManagement.js" onload="updateLoadingStatus('场景管理组件已加载')"></script>
+    <script src="./components/VideoGeneration.js" onload="updateLoadingStatus('视频生成组件已加载')"></script>
+    <script src="./components/LogDiagnosis.js" onload="updateLoadingStatus('日志诊断组件已加载')"></script>
+    <script src="./app.js" onload="updateLoadingStatus('主应用已加载，正在初始化...')"></script>
+    
+    <!-- Error handling -->
+    <script>
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript Error:', e);
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = 'padding: 20px; color: red; text-align: center; font-family: Arial, sans-serif;';
+            errorDiv.innerHTML = `
+                <h2>加载错误</h2>
+                <p><strong>错误信息:</strong> ${e.message}</p>
+                <p><strong>文件:</strong> ${e.filename}</p>
+                <p><strong>行号:</strong> ${e.lineno}</p>
+                <p>请刷新页面重试，或查看浏览器控制台获取详细信息</p>
+                <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 10px;">刷新页面</button>
+            `;
+            document.getElementById('app').innerHTML = '';
+            document.getElementById('app').appendChild(errorDiv);
+        });
+        
+        // 超时检查
+        setTimeout(function() {
+            const app = document.getElementById('app');
+            if (app && app.innerHTML.includes('正在加载')) {
+                app.innerHTML = `
+                    <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+                        <h2 style="color: orange;">加载超时</h2>
+                        <p>应用加载时间过长，可能是网络问题</p>
+                        <p>您可以尝试：</p>
+                        <ul style="text-align: left; display: inline-block;">
+                            <li>刷新页面重试</li>
+                            <li>检查网络连接</li>
+                            <li>访问 <a href="./simple.html">简化版本</a></li>
+                            <li>访问 <a href="./debug.html">调试页面</a></li>
+                        </ul>
+                        <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 20px;">刷新页面</button>
+                    </div>
+                `;
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

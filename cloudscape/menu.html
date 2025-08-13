@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos CloudScape 访问菜单</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #232f3e;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .menu-item {
+            display: block;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: #fff;
+            border: 2px solid #e1e4e8;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .menu-item:hover {
+            border-color: #0073bb;
+            background: #f0f8ff;
+        }
+        .menu-item h3 {
+            margin: 0 0 5px 0;
+            color: #0073bb;
+        }
+        .menu-item p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.working { background: #d4edda; color: #155724; }
+        .status.testing { background: #fff3cd; color: #856404; }
+        .status.debug { background: #f8d7da; color: #721c24; }
+        .info {
+            background: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .server-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Cosmos CloudScape 访问菜单</h1>
+        
+        <div class="info">
+            <strong>📍 当前服务器信息：</strong>
+            <div class="server-info">
+                公网IP: 35.86.89.178<br>
+                内网IP: 172.31.16.230<br>
+                端口: 5001<br>
+                状态: 运行中 ✅
+            </div>
+        </div>
+
+        <h2>🎯 可用页面</h2>
+        
+        <a href="./aws-style.html" class="menu-item">
+            <h3>AWS风格版本 <span class="status working">最新推荐</span></h3>
+            <p>完全按照AWS官网风格设计，现代化UI，功能完整，用户体验极佳</p>
+        </a>
+        
+        <a href="./basic.html" class="menu-item">
+            <h3>基础版本 <span class="status working">稳定</span></h3>
+            <p>纯HTML/JS实现，无外部依赖，功能完整，加载速度快</p>
+        </a>
+        
+        <a href="./index.html" class="menu-item">
+            <h3>主应用 <span class="status testing">修复中</span></h3>
+            <p>完整的CloudScape界面，包含所有功能模块</p>
+        </a>
+        
+        <a href="./simple.html" class="menu-item">
+            <h3>简化版本 <span class="status testing">CDN问题</span></h3>
+            <p>简化的CloudScape界面，基本功能测试</p>
+        </a>
+        
+        <a href="./debug.html" class="menu-item">
+            <h3>调试页面 <span class="status debug">调试</span></h3>
+            <p>用于诊断加载问题和组件状态</p>
+        </a>
+        
+        <a href="./test.html" class="menu-item">
+            <h3>组件测试 <span class="status working">可用</span></h3>
+            <p>基础组件功能测试页面</p>
+        </a>
+
+        <h2>🔗 外部链接</h2>
+        
+        <a href="http://35.86.89.178:5000" class="menu-item" target="_blank">
+            <h3>Streamlit版本 <span class="status working">运行中</span></h3>
+            <p>原始的Streamlit界面，用于功能对比</p>
+        </a>
+
+        <h2>📋 使用说明</h2>
+        <div class="info">
+            <ul>
+                <li><strong>AWS风格版本</strong>: 🌟 最新推荐，完全按照AWS官网风格设计，现代化UI体验</li>
+                <li><strong>基础版本</strong>: 稳定可靠，纯HTML/JS实现，无外部依赖</li>
+                <li><strong>主应用</strong>: CloudScape组件版本，功能完整但可能有加载问题</li>
+                <li><strong>简化版本</strong>: 可能遇到CDN加载问题</li>
+                <li><strong>调试页面</strong>: 帮助诊断加载问题</li>
+                <li><strong>组件测试</strong>: 验证基础组件是否正常工作</li>
+            </ul>
+        </div>
+
+        <h2>🛠️ 故障排除</h2>
+        <div class="info">
+            <p><strong>推荐访问顺序：</strong></p>
+            <ol>
+                <li><strong>首选：</strong>AWS风格版本 - 最佳用户体验，现代化设计</li>
+                <li><strong>备选：</strong>基础版本 - 功能完整且稳定</li>
+                <li>如果需要CloudScape样式，尝试主应用</li>
+                <li>遇到问题时使用调试页面</li>
+            </ol>
+            
+            <p><strong>AWS风格版本特色：</strong></p>
+            <ul>
+                <li>🎨 完全按照AWS官网设计风格</li>
+                <li>🚀 现代化的用户界面和交互体验</li>
+                <li>📱 完美的响应式设计，支持各种设备</li>
+                <li>⚡ 快速加载，无外部依赖问题</li>
+                <li>🔧 完整的功能覆盖和错误处理</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #666; font-size: 14px;">
+            <p>Cosmos CloudScape Interface v1.0</p>
+            <p>基于 AWS CloudScape Design System</p>
+        </div>
+    </div>
+
+    <script>
+        // 简单的状态检查
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Cosmos CloudScape 访问菜单已加载');
+            
+            // 可以添加一些简单的状态检查
+            fetch('./index.html')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('主应用文件可访问');
+                    }
+                })
+                .catch(error => {
+                    console.warn('主应用文件访问失败:', error);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos API 实时日志</title>
+    <style>
+        :root {
+            --bg-primary: #1a1b1e;
+            --bg-secondary: #2c2e33;
+            --bg-tertiary: #3b3d42;
+            --text-primary: #e4e6eb;
+            --text-secondary: #b0b3b8;
+            --accent-primary: #4f46e5;
+            --accent-secondary: #6366f1;
+            --success: #22c55e;
+            --warning: #eab308;
+            --error: #ef4444;
+            --timestamp: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .status-bar {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15px;
+            position: relative;
+        }
+        
+        .status-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .status-value {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .status-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(110%);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .connection-status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .connected {
+            background-color: var(--success);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .disconnected {
+            background-color: var(--error);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        #log-container {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "JetBrains Mono", "Fira Code", "Monaco", "Consolas", monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            height: 60vh;
+            max-height: 600px;
+            position: relative;
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .log-entry {
+            padding: 6px 10px;
+            margin: 2px 0;
+            border-radius: 4px;
+            animation: fadeIn 0.3s ease-in-out;
+            transition: background-color 0.2s ease;
+        }
+
+        .log-entry:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error { color: var(--error); }
+        .warning { color: var(--warning); }
+        .success { color: var(--success); }
+        .timestamp { color: var(--timestamp); }
+
+        .auto-scroll {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 0;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .auto-scroll:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            background-color: var(--accent-secondary);
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-tertiary);
+            border-radius: 5px;
+            border: 2px solid var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        @media (max-width: 768px) {
+            .status-bar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .status-item {
+                width: 100%;
+                padding: 10px 0;
+            }
+            
+            .status-item::after {
+                display: none;
+            }
+            
+            .status-item:not(:last-child) {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+
+        /* 深色主题优化 */
+        @media (prefers-color-scheme: dark) {
+            ::selection {
+                background: var(--accent-primary);
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Cosmos API 实时日志监控</h1>
+        
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-value" id="active-tasks">-</div>
+                <div class="status-label">活跃任务</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="available-gpus">-</div>
+                <div class="status-label">可用GPU</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="queue-size">-</div>
+                <div class="status-label">队列长度</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <span class="connection-status" id="connection-status"></span>
+            <span id="connection-text">连接中...</span>
+            <button class="btn btn-primary" onclick="toggleConnection()" id="toggle-btn">
+                <span id="toggle-icon">⏸️</span>
+                <span id="toggle-text">暂停</span>
+            </button>
+            <button class="btn btn-secondary" onclick="clearLogs()">🗑️ 清空日志</button>
+            <button class="btn btn-secondary" onclick="scrollToBottom()">⬇️ 滚动到底部</button>
+        </div>
+        
+        <div id="log-container"></div>
+    </div>
+
+    <button class="auto-scroll" id="auto-scroll-btn" onclick="scrollToBottom()" title="滚动到底部">
+        ⬇️
+    </button>
+
+    <script>
+        let eventSource = null;
+        let isConnected = false;
+        let isPaused = false;
+        let isAutoScrollEnabled = true;
+        let lastScrollPosition = 0;
+        const logContainer = document.getElementById('log-container');
+        const autoScrollBtn = document.getElementById('auto-scroll-btn');
+        
+        function updateConnectionStatus(connected) {
+            isConnected = connected;
+            const statusElement = document.getElementById('connection-status');
+            const textElement = document.getElementById('connection-text');
+            
+            if (connected) {
+                statusElement.className = 'connection-status connected';
+                textElement.textContent = '已连接';
+            } else {
+                statusElement.className = 'connection-status disconnected';
+                textElement.textContent = '已断开';
+            }
+        }
+        
+        function connectToLogs() {
+            if (eventSource) {
+                eventSource.close();
+            }
+            
+            eventSource = new EventSource('/logs/stream');
+            
+            eventSource.onopen = function() {
+                updateConnectionStatus(true);
+            };
+            
+            eventSource.onmessage = function(event) {
+                if (!isPaused) {
+                    const logContainer = document.getElementById('log-container');
+                    const wasAtBottom = isAtBottom();
+                    
+                    const logEntry = document.createElement('div');
+                    logEntry.className = 'log-entry';
+                    
+                    let logText = event.data;
+                    
+                    // 添加颜色高亮
+                    if (logText.includes('ERROR')) {
+                        logEntry.classList.add('error');
+                    } else if (logText.includes('WARNING')) {
+                        logEntry.classList.add('warning');
+                    } else if (logText.includes('completed') || logText.includes('SUCCESS')) {
+                        logEntry.classList.add('success');
+                    }
+                    
+                    // 高亮时间戳
+                    logText = logText.replace(/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/g, '<span class="timestamp">$1</span>');
+                    
+                    logEntry.innerHTML = logText;
+                    logContainer.appendChild(logEntry);
+                    
+                    // 限制日志条数
+                    const entries = logContainer.children;
+                    if (entries.length > 1000) {
+                        logContainer.removeChild(entries[0]);
+                    }
+                    
+                    // 如果之前在底部，则自动滚动
+                    if (wasAtBottom && isAutoScrollEnabled) {
+                        scrollToBottom();
+                    }
+                    
+                    // 更新滚动按钮显示状态
+                    updateScrollButtonVisibility();
+                }
+            };
+            
+            eventSource.onerror = function() {
+                updateConnectionStatus(false);
+                setTimeout(connectToLogs, 5000); // 5秒后重连
+            };
+        }
+        
+        function toggleConnection() {
+            isPaused = !isPaused;
+            const button = document.getElementById('toggle-btn');
+            const icon = document.getElementById('toggle-icon');
+            const text = document.getElementById('toggle-text');
+            
+            if (isPaused) {
+                icon.textContent = '▶️';
+                text.textContent = '继续';
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-secondary');
+            } else {
+                icon.textContent = '⏸️';
+                text.textContent = '暂停';
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-primary');
+            }
+        }
+        
+        function clearLogs() {
+            document.getElementById('log-container').innerHTML = '';
+        }
+        
+        function isAtBottom() {
+            const container = document.getElementById('log-container');
+            return Math.abs(container.scrollHeight - container.clientHeight - container.scrollTop) < 50;
+        }
+        
+        function scrollToBottom() {
+            const container = document.getElementById('log-container');
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function updateScrollButtonVisibility() {
+            const container = document.getElementById('log-container');
+            if (!isAtBottom()) {
+                autoScrollBtn.style.display = 'flex';
+            } else {
+                autoScrollBtn.style.display = 'none';
+            }
+        }
+        
+        // 监听滚动事件
+        logContainer.addEventListener('scroll', function() {
+            updateScrollButtonVisibility();
+            
+            // 检测是否手动滚动
+            const currentPosition = logContainer.scrollTop;
+            if (Math.abs(currentPosition - lastScrollPosition) > 50) {
+                isAutoScrollEnabled = isAtBottom();
+            }
+            lastScrollPosition = currentPosition;
+        });
+        
+        // 定期更新状态信息
+        function updateStatus() {
+            fetch('/health')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('active-tasks').textContent = data.active_tasks || 0;
+                    document.getElementById('available-gpus').textContent = data.available_gpus || 0;
+                    document.getElementById('queue-size').textContent = data.queue_size || 0;
+                })
+                .catch(error => {
+                    console.error('Failed to fetch status:', error);
+                });
+        }
+        
+        // 页面加载时启动
+        window.onload = function() {
+            connectToLogs();
+            updateStatus();
+            setInterval(updateStatus, 10000); // 每10秒更新一次状态
+        };
+        
+        // 页面关闭时清理
+        window.onbeforeunload = function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+        };
+    </script>
+</body>
+</html>

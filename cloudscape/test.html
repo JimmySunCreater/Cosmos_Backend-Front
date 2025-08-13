@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudScape组件测试</title>
+    <link rel="stylesheet" href="https://unpkg.com/@cloudscape-design/components/styles.css">
+    <style>
+        body { margin: 20px; font-family: Arial, sans-serif; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>CloudScape组件测试页面</h1>
+    
+    <div class="test-section">
+        <h2>基础组件测试</h2>
+        <div id="basic-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>配置测试</h2>
+        <div id="config-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>API客户端测试</h2>
+        <div id="api-test"></div>
+    </div>
+
+    <!-- CloudScape Design System -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@cloudscape-design/components/index.js"></script>
+    
+    <!-- 应用脚本 -->
+    <script src="./config.js"></script>
+    <script src="./api.js"></script>
+    
+    <script>
+        const { Button, Alert, Box, Container, Header } = CloudscapeDesignSystem;
+        
+        // 基础组件测试
+        function BasicTest() {
+            const [clicked, setClicked] = React.useState(false);
+            
+            return React.createElement(Container, {
+                header: React.createElement(Header, { variant: "h3" }, "基础组件测试")
+            },
+                React.createElement(Box, null,
+                    React.createElement(Button, {
+                        variant: "primary",
+                        onClick: () => setClicked(!clicked)
+                    }, "点击测试"),
+                    clicked && React.createElement(Alert, {
+                        type: "success",
+                        dismissible: true,
+                        onDismiss: () => setClicked(false)
+                    }, "CloudScape组件工作正常！")
+                )
+            );
+        }
+        
+        // 配置测试
+        function ConfigTest() {
+            return React.createElement(Container, {
+                header: React.createElement(Header, { variant: "h3" }, "配置测试")
+            },
+                React.createElement(Box, null,
+                    React.createElement("pre", {
+                        style: { 
+                            backgroundColor: '#f5f5f5', 
+                            padding: '10px', 
+                            borderRadius: '4px',
+                            fontSize: '12px'
+                        }
+                    }, JSON.stringify({
+                        COSMOS_API_URL: CONFIG.COSMOS_API_URL,
+                        COSMOS_LOG_URL: CONFIG.COSMOS_LOG_URL,
+                        ENHANCE_API_URL: CONFIG.ENHANCE_API_URL,
+                        LIBRARY_API_URL: CONFIG.LIBRARY_API_URL
+                    }, null, 2))
+                )
+            );
+        }
+        
+        // API客户端测试
+        function ApiTest() {
+            const [testResult, setTestResult] = React.useState('');
+            
+            const testApiClient = () => {
+                try {
+                    const uuid = apiClient.generateUUID();
+                    const statusInfo = apiClient.getStatusInfo('Waiting');
+                    const formattedDesc = apiClient.formatSceneDescription('这是一个很长的场景描述，用来测试格式化功能是否正常工作', 20);
+                    
+                    setTestResult(`UUID生成: ${uuid}
+状态信息: ${JSON.stringify(statusInfo)}
+描述格式化: ${formattedDesc}`);
+                } catch (error) {
+                    setTestResult(`错误: ${error.message}`);
+                }
+            };
+            
+            return React.createElement(Container, {
+                header: React.createElement(Header, { variant: "h3" }, "API客户端测试")
+            },
+                React.createElement(Box, null,
+                    React.createElement(Button, {
+                        onClick: testApiClient
+                    }, "测试API客户端"),
+                    testResult && React.createElement("pre", {
+                        style: { 
+                            backgroundColor: '#f5f5f5', 
+                            padding: '10px', 
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            marginTop: '10px'
+                        }
+                    }, testResult)
+                )
+            );
+        }
+        
+        // 渲染测试组件
+        ReactDOM.render(React.createElement(BasicTest), document.getElementById('basic-test'));
+        ReactDOM.render(React.createElement(ConfigTest), document.getElementById('config-test'));
+        ReactDOM.render(React.createElement(ApiTest), document.getElementById('api-test'));
+    </script>
+</body>
+</html>

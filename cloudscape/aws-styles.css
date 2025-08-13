@@ -1,0 +1,564 @@
+/* AWS官方网站风格样式 */
+
+/* 全局重置和基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* AWS官方色彩系统 */
+    --aws-orange: #FF9900;
+    --aws-orange-dark: #E88900;
+    --aws-orange-light: #FFB84D;
+    --aws-blue: #232F3E;
+    --aws-blue-light: #37475A;
+    --aws-blue-dark: #161E2D;
+    --aws-gray-50: #FAFBFC;
+    --aws-gray-100: #F2F3F3;
+    --aws-gray-200: #EAEDED;
+    --aws-gray-300: #D5DBDB;
+    --aws-gray-400: #AAB7B8;
+    --aws-gray-500: #85929E;
+    --aws-gray-600: #5D6D7E;
+    --aws-gray-700: #34495E;
+    --aws-gray-800: #2C3E50;
+    --aws-gray-900: #1B2631;
+    --aws-white: #FFFFFF;
+    --aws-success: #1D8102;
+    --aws-warning: #FF9900;
+    --aws-error: #D13212;
+    --aws-info: #0073BB;
+    
+    /* 字体系统 */
+    --aws-font-family: "Amazon Ember", "Helvetica Neue", Roboto, Arial, sans-serif;
+    --aws-font-mono: "Amazon Ember Mono", "Courier New", monospace;
+    
+    /* 间距系统 */
+    --aws-space-xs: 4px;
+    --aws-space-s: 8px;
+    --aws-space-m: 16px;
+    --aws-space-l: 24px;
+    --aws-space-xl: 32px;
+    --aws-space-xxl: 48px;
+    
+    /* 圆角系统 */
+    --aws-border-radius-s: 4px;
+    --aws-border-radius-m: 8px;
+    --aws-border-radius-l: 12px;
+    
+    /* 阴影系统 */
+    --aws-shadow-s: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --aws-shadow-m: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --aws-shadow-l: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* 基础样式 */
+body {
+    font-family: var(--aws-font-family);
+    background-color: var(--aws-gray-50);
+    color: var(--aws-gray-800);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* AWS顶部导航栏 */
+.aws-header {
+    background: var(--aws-blue);
+    color: var(--aws-white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--aws-shadow-s);
+}
+
+.aws-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--aws-space-m) var(--aws-space-l);
+}
+
+.aws-logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--aws-white);
+    text-decoration: none;
+}
+
+.aws-logo::before {
+    content: "☁️";
+    margin-right: var(--aws-space-s);
+    font-size: 28px;
+}
+
+.aws-nav {
+    display: flex;
+    gap: var(--aws-space-l);
+}
+
+.aws-nav a {
+    color: var(--aws-white);
+    text-decoration: none;
+    padding: var(--aws-space-s) var(--aws-space-m);
+    border-radius: var(--aws-border-radius-s);
+    transition: background-color 0.2s ease;
+}
+
+.aws-nav a:hover {
+    background-color: var(--aws-blue-light);
+}
+
+/* 主容器 */
+.aws-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--aws-space-xl) var(--aws-space-l);
+}
+
+/* AWS英雄区域 */
+.aws-hero {
+    background: linear-gradient(135deg, var(--aws-blue) 0%, var(--aws-blue-light) 100%);
+    color: var(--aws-white);
+    padding: var(--aws-space-xxl) 0;
+    text-align: center;
+    margin-bottom: var(--aws-space-xl);
+}
+
+.aws-hero h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: var(--aws-space-m);
+    line-height: 1.2;
+}
+
+.aws-hero p {
+    font-size: 20px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* AWS卡片系统 */
+.aws-card {
+    background: var(--aws-white);
+    border-radius: var(--aws-border-radius-m);
+    box-shadow: var(--aws-shadow-s);
+    padding: var(--aws-space-l);
+    margin-bottom: var(--aws-space-l);
+    border: 1px solid var(--aws-gray-200);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.aws-card:hover {
+    box-shadow: var(--aws-shadow-m);
+    transform: translateY(-2px);
+}
+
+.aws-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--aws-space-l);
+    padding-bottom: var(--aws-space-m);
+    border-bottom: 2px solid var(--aws-gray-100);
+}
+
+.aws-card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--aws-blue);
+    margin: 0;
+}
+
+.aws-card-subtitle {
+    color: var(--aws-gray-600);
+    font-size: 14px;
+    margin-top: var(--aws-space-xs);
+}
+
+/* AWS按钮系统 */
+.aws-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--aws-border-radius-s);
+    font-family: var(--aws-font-family);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 48px;
+    gap: var(--aws-space-s);
+}
+
+.aws-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.aws-btn-primary {
+    background: var(--aws-orange);
+    color: var(--aws-white);
+    border: 2px solid var(--aws-orange);
+}
+
+.aws-btn-primary:hover:not(:disabled) {
+    background: var(--aws-orange-dark);
+    border-color: var(--aws-orange-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--aws-shadow-s);
+}
+
+.aws-btn-secondary {
+    background: var(--aws-white);
+    color: var(--aws-blue);
+    border: 2px solid var(--aws-blue);
+}
+
+.aws-btn-secondary:hover:not(:disabled) {
+    background: var(--aws-blue);
+    color: var(--aws-white);
+    transform: translateY(-1px);
+    box-shadow: var(--aws-shadow-s);
+}
+
+.aws-btn-outline {
+    background: transparent;
+    color: var(--aws-orange);
+    border: 2px solid var(--aws-orange);
+}
+
+.aws-btn-outline:hover:not(:disabled) {
+    background: var(--aws-orange);
+    color: var(--aws-white);
+}
+
+/* AWS表单系统 */
+.aws-form-group {
+    margin-bottom: var(--aws-space-l);
+}
+
+.aws-form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--aws-blue);
+    margin-bottom: var(--aws-space-s);
+    font-size: 16px;
+}
+
+.aws-form-input,
+.aws-form-textarea,
+.aws-form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--aws-gray-300);
+    border-radius: var(--aws-border-radius-s);
+    font-family: var(--aws-font-family);
+    font-size: 16px;
+    background: var(--aws-white);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aws-form-input:focus,
+.aws-form-textarea:focus,
+.aws-form-select:focus {
+    outline: none;
+    border-color: var(--aws-orange);
+    box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1);
+}
+
+.aws-form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.aws-form-help {
+    font-size: 14px;
+    color: var(--aws-gray-600);
+    margin-top: var(--aws-space-xs);
+}
+
+/* AWS网格系统 */
+.aws-grid {
+    display: grid;
+    gap: var(--aws-space-l);
+}
+
+.aws-grid-2 {
+    grid-template-columns: 2fr 1fr;
+}
+
+.aws-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.aws-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+    .aws-grid-2,
+    .aws-grid-3,
+    .aws-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* AWS导航标签 */
+.aws-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--aws-gray-200);
+    margin-bottom: var(--aws-space-l);
+    overflow-x: auto;
+}
+
+.aws-tab {
+    padding: var(--aws-space-m) var(--aws-space-l);
+    background: none;
+    border: none;
+    font-family: var(--aws-font-family);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--aws-gray-600);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.aws-tab:hover {
+    color: var(--aws-blue);
+    background: var(--aws-gray-50);
+}
+
+.aws-tab.active {
+    color: var(--aws-orange);
+    border-bottom-color: var(--aws-orange);
+}
+
+/* AWS状态指示器 */
+.aws-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.aws-status-success {
+    background: rgba(29, 129, 2, 0.1);
+    color: var(--aws-success);
+}
+
+.aws-status-warning {
+    background: rgba(255, 153, 0, 0.1);
+    color: var(--aws-warning);
+}
+
+.aws-status-error {
+    background: rgba(209, 50, 18, 0.1);
+    color: var(--aws-error);
+}
+
+.aws-status-info {
+    background: rgba(0, 115, 187, 0.1);
+    color: var(--aws-info);
+}
+
+/* AWS警告框 */
+.aws-alert {
+    padding: var(--aws-space-m);
+    border-radius: var(--aws-border-radius-s);
+    margin-bottom: var(--aws-space-l);
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--aws-space-m);
+}
+
+.aws-alert-success {
+    background: rgba(29, 129, 2, 0.05);
+    border-color: var(--aws-success);
+    color: var(--aws-success);
+}
+
+.aws-alert-warning {
+    background: rgba(255, 153, 0, 0.05);
+    border-color: var(--aws-warning);
+    color: var(--aws-warning);
+}
+
+.aws-alert-error {
+    background: rgba(209, 50, 18, 0.05);
+    border-color: var(--aws-error);
+    color: var(--aws-error);
+}
+
+.aws-alert-info {
+    background: rgba(0, 115, 187, 0.05);
+    border-color: var(--aws-info);
+    color: var(--aws-info);
+}
+
+.aws-alert-icon {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+/* AWS统计卡片 */
+.aws-metric-card {
+    background: var(--aws-white);
+    border-radius: var(--aws-border-radius-m);
+    padding: var(--aws-space-l);
+    text-align: center;
+    box-shadow: var(--aws-shadow-s);
+    border: 1px solid var(--aws-gray-200);
+    transition: transform 0.2s ease;
+}
+
+.aws-metric-card:hover {
+    transform: translateY(-2px);
+}
+
+.aws-metric-value {
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--aws-orange);
+    line-height: 1;
+    margin-bottom: var(--aws-space-s);
+}
+
+.aws-metric-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--aws-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* AWS加载动画 */
+.aws-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--aws-space-xxl);
+    color: var(--aws-gray-600);
+}
+
+.aws-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--aws-gray-200);
+    border-top: 4px solid var(--aws-orange);
+    border-radius: 50%;
+    animation: aws-spin 1s linear infinite;
+    margin-right: var(--aws-space-m);
+}
+
+@keyframes aws-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* AWS响应式设计 */
+@media (max-width: 768px) {
+    .aws-container {
+        padding: var(--aws-space-l) var(--aws-space-m);
+    }
+    
+    .aws-hero h1 {
+        font-size: 36px;
+    }
+    
+    .aws-hero p {
+        font-size: 18px;
+    }
+    
+    .aws-header-content {
+        flex-direction: column;
+        gap: var(--aws-space-m);
+    }
+    
+    .aws-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .aws-tabs {
+        justify-content: flex-start;
+    }
+}
+
+/* AWS工具提示 */
+.aws-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.aws-tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--aws-blue);
+    color: var(--aws-white);
+    text-align: center;
+    border-radius: var(--aws-border-radius-s);
+    padding: var(--aws-space-s);
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+}
+
+.aws-tooltip:hover .aws-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* AWS代码块 */
+.aws-code {
+    background: var(--aws-gray-900);
+    color: var(--aws-gray-100);
+    padding: var(--aws-space-l);
+    border-radius: var(--aws-border-radius-s);
+    font-family: var(--aws-font-mono);
+    font-size: 14px;
+    overflow-x: auto;
+    margin: var(--aws-space-m) 0;
+}
+
+/* AWS隐藏类 */
+.aws-hidden {
+    display: none !important;
+}
+
+/* AWS可见性工具类 */
+.aws-visible-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .aws-hidden-mobile {
+        display: none !important;
+    }
+    
+    .aws-visible-mobile {
+        display: block;
+    }
+}

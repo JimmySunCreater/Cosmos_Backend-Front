@@ -1,0 +1,173 @@
+{
+  "analysis_time": "2025-06-15T23:29:45.997976",
+  "project_structure": {
+    "核心API服务": [
+      {
+        "path": "cosmos_api_service_simple.py",
+        "size": 32036,
+        "modified": "2025-06-10T23:13:16.327793"
+      },
+      {
+        "path": "gpu_manager.py",
+        "size": 5352,
+        "modified": "2025-06-10T01:27:09.840035"
+      },
+      {
+        "path": "translator.py",
+        "size": 4124,
+        "modified": "2025-06-10T23:17:09.876932"
+      },
+      {
+        "path": "config.py",
+        "size": 2737,
+        "modified": "2025-06-09T22:07:17.803018"
+      },
+      {
+        "path": "upload_to_s3.py",
+        "size": 2912,
+        "modified": "2025-06-10T14:47:02.794472"
+      },
+      {
+        "path": "utilities/start_all_tasks.py",
+        "size": 6305,
+        "modified": "2025-06-10T17:12:49.808982"
+      }
+    ],
+    "Streamlit Web界面": [
+      {
+        "path": "streamlit/streamlit_app.py",
+        "size": 22744,
+        "modified": "2025-06-11T12:41:10.774558"
+      },
+      {
+        "path": "streamlit/config_streamlit.py",
+        "size": 1838,
+        "modified": "2025-06-11T13:40:42.832298"
+      },
+      {
+        "path": "streamlit/start_streamlit.sh",
+        "size": 913,
+        "modified": "2025-06-10T15:13:38.519083"
+      },
+      {
+        "path": "streamlit/requirements_streamlit.txt",
+        "size": 54,
+        "modified": "2025-06-10T15:05:32.420489"
+      },
+      {
+        "path": "streamlit/amazon.png",
+        "size": 12901,
+        "modified": "2025-06-10T20:31:50.973629"
+      },
+      {
+        "path": "streamlit/cosmos-streamlit.service",
+        "size": 602,
+        "modified": "2025-06-10T22:40:01.070472"
+      },
+      {
+        "path": "streamlit/README.md",
+        "size": 1934,
+        "modified": "2025-06-10T15:15:24.316647"
+      },
+      {
+        "path": "streamlit/STREAMLIT_README.md",
+        "size": 3448,
+        "modified": "2025-06-10T15:23:03.470091"
+      }
+    ],
+    "服务配置": [
+      {
+        "path": "cosmos-api.service",
+        "size": 437,
+        "modified": "2025-06-10T09:14:14.709013"
+      },
+      {
+        "path": "start_service.sh",
+        "size": 700,
+        "modified": "2025-06-11T09:33:25.211490"
+      },
+      {
+        "path": "start_web_ui.sh",
+        "size": 294,
+        "modified": "2025-06-10T15:13:57.856186"
+      },
+      {
+        "path": "utilities/check_deployment.sh",
+        "size": 933,
+        "modified": "2025-06-10T16:53:18.553342"
+      }
+    ],
+    "文档和依赖": [
+      {
+        "path": "requirements.txt",
+        "size": 84,
+        "modified": "2025-06-09T21:49:36.448338"
+      },
+      {
+        "path": "README.md",
+        "size": 14880,
+        "modified": "2025-06-11T09:36:20.319484"
+      }
+    ],
+    "Web资源": [
+      {
+        "path": "templates/logs.html",
+        "size": 15963,
+        "modified": "2025-06-10T22:30:15.449876"
+      },
+      {
+        "path": "static/css/logs.css",
+        "size": 1210,
+        "modified": "2025-06-10T22:10:43.342929"
+      }
+    ]
+  },
+  "core_files": [
+    "cosmos_api_service_simple.py",
+    "gpu_manager.py",
+    "translator.py",
+    "config.py",
+    "upload_to_s3.py",
+    "streamlit/streamlit_app.py",
+    "streamlit/config_streamlit.py",
+    "streamlit/start_streamlit.sh",
+    "streamlit/requirements_streamlit.txt",
+    "streamlit/amazon.png",
+    "streamlit/cosmos-streamlit.service",
+    "cosmos-api.service",
+    "start_service.sh",
+    "start_web_ui.sh",
+    "requirements.txt",
+    "utilities/check_deployment.sh",
+    "utilities/start_all_tasks.py",
+    "templates/logs.html",
+    "static/css/logs.css",
+    "README.md",
+    "streamlit/README.md",
+    "streamlit/STREAMLIT_README.md"
+  ],
+  "dependencies": [
+    "Flask==2.3.3",
+    "boto3==1.34.0",
+    "botocore==1.34.0",
+    "requests==2.31.0",
+    "python-dateutil==2.8.2",
+    "streamlit>=1.28.0",
+    "requests>=2.31.0",
+    "pandas>=2.0.0",
+    "uuid"
+  ],
+  "services": [
+    {
+      "file": "cosmos-api.service",
+      "description": "Cosmos API主服务",
+      "exists": true
+    },
+    {
+      "file": "streamlit/cosmos-streamlit.service",
+      "description": "Streamlit Web界面服务",
+      "exists": true
+    }
+  ],
+  "configurations": []
+}
